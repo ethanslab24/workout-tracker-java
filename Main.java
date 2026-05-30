@@ -26,7 +26,7 @@ public class Main {
         switch(choice){
             case 1 : keyboard.nextLine();
                      Workout workout = new Workout();
-                     System.out.println("Exercise Name: "); 
+                     System.out.println("\n" + "Exercise Name: "); 
                      exercise = keyboard.nextLine();
                      workout.exerciseName = exercise;
                      System.out.println("Sets: ");
@@ -38,19 +38,20 @@ public class Main {
                      keyboard.nextLine();
                      System.out.println("Date: ");
                      workout.date = keyboard.nextLine();
-                     
-                     System.out.println(workout.exerciseName);
-                     System.out.println(workout.sets);
-                     System.out.println(workout.reps);
-                     System.out.println(workout.weight);
-                     System.out.println(workout.date);
                      workouts.add(workout);
                      break;
             case 2 : for(int i = 0; i < workouts.size(); i++){
                          System.out.println(workouts.get(i));
-            }; break;
-            case 3 : System.out.println("Delete Workout: ");  break;
-                     
+                        }
+                     break;
+            case 3 : for(int i = 0; i < workouts.size(); i++){
+                         System.out.print(i);
+                         System.out.println(" : " + workouts.get(i).exerciseName);
+                        } 
+                     int delWorkout = keyboard.nextInt(); 
+                     workouts.remove(delWorkout);
+                     break;
+                      
             case 4 : System.out.println("Exit"); running = false; break;
             default: System.err.println("Not a viable input.");
             }
