@@ -18,7 +18,8 @@ public class Main {
         System.out.println("1. Add workout");
         System.out.println("2. View workouts");
         System.out.println("3. Delete workout");
-        System.out.println("4. Exit");
+        System.out.println("4. Search workout");
+        System.out.println("5. Exit"); 
         System.out.print("Enter Choice: ");
 
         int choice = keyboard.nextInt();
@@ -42,17 +43,32 @@ public class Main {
                      break;
             case 2 : for(int i = 0; i < workouts.size(); i++){
                          System.out.println(workouts.get(i));
-                        }
+                     }
                      break;
             case 3 : for(int i = 0; i < workouts.size(); i++){
                          System.out.print(i);
                          System.out.println(" : " + workouts.get(i).exerciseName);
-                        } 
+                     } 
                      int delWorkout = keyboard.nextInt(); 
                      workouts.remove(delWorkout);
                      break;
                       
-            case 4 : System.out.println("Exit"); running = false; break;
+            case 4 : boolean found = false;
+                     System.out.print("Type Workout: "); 
+                     keyboard.nextLine();
+                     String searchExercise = keyboard.nextLine();
+                     for(int i = 0; i < workouts.size(); i++){
+                         if(workouts.get(i).exerciseName.toLowerCase().contains(searchExercise.toLowerCase())){
+                            System.out.println(workouts.get(i) + "\n");
+                            found = true;
+                        }
+                     }
+                     if (!found){
+                         System.out.println("Workout not found.\n");
+                        } break;
+
+                    
+            case 5 : System.out.println("Exit"); running = false; break;
             default: System.err.println("Not a viable input.");
             }
         
