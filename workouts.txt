@@ -1,0 +1,6 @@
+Bench Press,4,15,90.0,05-30-26
+Squats,6,8,60.0,05-30-26
+Bicep Curls,4,12,30.0,05-30-26
+Shoulder Press,4,18,60.0,05-30-26
+Push ups,4,15,0.0,05-30-26
+Lateral raises,4,15,30.0,05-30-26
