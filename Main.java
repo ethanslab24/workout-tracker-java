@@ -46,12 +46,13 @@ public class Main {
                      workouts.add(workout);
                      try {
                          toFile = new PrintWriter(new FileWriter("workouts.txt", true));
+                         toFile.println(workout.exerciseName + "," + workout.sets + "," + workout.reps + "," + workout.weight + "," + workout.date);
+                         toFile.close();
                      } catch (IOException e) {
                            System.out.println("The workouts.txt could not be created");
                            System.exit(0);
                      }
-                     toFile.println(workout.exerciseName + "," + workout.sets + "," + workout.reps + "," + workout.weight + "," + workout.date);
-                     toFile.close();
+                     
                      break;
             case 2 : for(int i = 0; i < workouts.size(); i++){
                          System.out.println(workouts.get(i));
@@ -61,8 +62,26 @@ public class Main {
                          System.out.print(i);
                          System.out.println(" : " + workouts.get(i).exerciseName);
                      } 
+                     System.out.print("Enter workout number to delete: ");
                      int delWorkout = keyboard.nextInt(); 
-                     workouts.remove(delWorkout);
+                     if(delWorkout >= 0 && delWorkout < workouts.size()){
+                        workouts.remove(delWorkout);
+                     }else{
+                        System.out.println("Invalid input.");
+                        break;
+                     }
+                     
+                     try {
+                         toFile = new PrintWriter(new FileWriter("workouts.txt"));
+                         for(int i = 0; i < workouts.size(); i++){
+                         Workout w = workouts.get(i);
+                         toFile.println(w.exerciseName + "," + w.sets + "," + w.reps + "," + w.weight + "," + w.date);
+                     }
+                     toFile.close();
+                     } catch (IOException e) {
+                           System.out.println("The workouts.txt could not be created");
+                           System.exit(0);
+                     }
                      break;
                       
             case 4 : boolean found = false;
