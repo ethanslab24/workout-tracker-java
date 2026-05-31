@@ -1,3 +1,6 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -5,6 +8,7 @@ public class Main {
     public static void main(String[] args) {
         
         Scanner keyboard = new Scanner(System.in);
+        PrintWriter toFile = null;
         ArrayList<Workout> workouts = new ArrayList<>();
         String exercise;
         int sets;
@@ -40,6 +44,14 @@ public class Main {
                      System.out.println("Date: ");
                      workout.date = keyboard.nextLine();
                      workouts.add(workout);
+                     try {
+                         toFile = new PrintWriter(new FileWriter("workouts.txt", true));
+                     } catch (IOException e) {
+                           System.out.println("The workouts.txt could not be created");
+                           System.exit(0);
+                     }
+                     toFile.println(workout.exerciseName + "," + workout.sets + "," + workout.reps + "," + workout.weight + "," + workout.date);
+                     toFile.close();
                      break;
             case 2 : for(int i = 0; i < workouts.size(); i++){
                          System.out.println(workouts.get(i));
