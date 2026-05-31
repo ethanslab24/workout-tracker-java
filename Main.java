@@ -1,3 +1,5 @@
+//import packages
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -21,6 +23,7 @@ public class Main {
         //double weight;
         //String date;
 
+        //read txt for file persistence
         try{
             Scanner fileScanner = new Scanner(new File("workouts.txt"));
             while(fileScanner.hasNextLine()){
@@ -43,17 +46,20 @@ public class Main {
             System.err.println("File not found.");
         }
         
+        //menu for user inputs
         while(running){
             System.out.println("1. Add workout");
             System.out.println("2. View workouts");
             System.out.println("3. Delete workout");
             System.out.println("4. Search workout");
-            System.out.println("5. Exit"); 
+            System.out.println("5. Edit Workout");
+            System.out.println("6. Exit"); 
             System.out.print("Enter Choice: ");
 
             int choice = keyboard.nextInt();
 
             switch(choice){
+                //adds workout
                 case 1 : keyboard.nextLine();
                         Workout workout = new Workout();
                         System.out.println("\n" + "Exercise Name: "); 
@@ -77,11 +83,13 @@ public class Main {
                         }
                      
                         break;
+                //view workouts
                 case 2 : for(int i = 0; i < workouts.size(); i++){
                             System.out.println(workouts.get(i));
                         }
                         break;
-                case 3 : for(int i = 0; i < workouts.size(); i++){
+                //delete workouts
+                case 3 :for(int i = 0; i < workouts.size(); i++){
                             System.out.print(i);
                             System.out.println(" : " + workouts.get(i).exerciseName);
                         } 
@@ -106,7 +114,8 @@ public class Main {
                         }
                         break;
                       
-                case 4 : boolean found = false;
+                //search workouts
+                case 4 :boolean found = false;
                         System.out.print("Type Workout: "); 
                         keyboard.nextLine();
                         String searchExercise = keyboard.nextLine();
@@ -120,8 +129,43 @@ public class Main {
                             System.out.println("Workout not found.\n");
                             } break;
 
-                    
-                case 5 : System.out.println("Exit"); running = false; break;
+                //edit    
+                case 5 : for(int i = 0; i < workouts.size(); i++){
+                            System.out.print(i);
+                            System.out.println(" : " + workouts.get(i).exerciseName);
+                        } 
+                        System.out.print("Enter workout number to edit: ");
+                        int editWorkout = keyboard.nextInt(); 
+                        if(editWorkout >= 0 && editWorkout < workouts.size()){
+                            keyboard.nextLine();
+                            Workout editedWorkout = workouts.get(editWorkout);
+                            System.out.println("\n" + "Exercise Name: "); 
+                            editedWorkout.exerciseName = keyboard.nextLine();
+                            System.out.println("Sets: ");
+                            editedWorkout.sets = keyboard.nextInt();
+                            System.out.println("Reps: ");
+                            editedWorkout.reps = keyboard.nextInt();
+                            System.out.println("Weight: ");
+                            editedWorkout.weight = keyboard.nextDouble();
+                            keyboard.nextLine();
+                            System.out.println("Date: ");
+                            editedWorkout.date = keyboard.nextLine();
+                            try {
+                                toFile = new PrintWriter(new FileWriter("workouts.txt"));
+                                for(int i = 0; i < workouts.size(); i++){
+                                Workout w = workouts.get(i);
+                                toFile.println(w.exerciseName + "," + w.sets + "," + w.reps + "," + w.weight + "," + w.date);
+                                }
+                                toFile.close();
+                            } catch (IOException e) {
+                            System.out.println("The workouts.txt could not be created");
+                            }
+                        }else{
+                            System.out.println("Invalid input.");
+                            break;
+                        } break;
+                //exit
+                case 6 : System.out.println("Exit"); running = false; break;
                 default: System.err.println("Not a viable input.");
             }
         
