@@ -85,8 +85,9 @@ public class Main {
                         break;
                 //view workouts
                 case 2 : for(int i = 0; i < workouts.size(); i++){
-                            System.out.println(workouts.get(i));
+                            System.out.println((i+1) + ": " +workouts.get(i));
                         }
+                        System.out.print("\n");
                         break;
                 //delete workouts
                 case 3 :for(int i = 0; i < workouts.size(); i++){
